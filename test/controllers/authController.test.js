@@ -44,6 +44,24 @@ test('login should login with valid user', async () =>{
         .expect(200)
 },10000)
 
+test('login should not login with invalid user', async () =>{
+    await request(app).post('/api/v1/users/login')
+        .send({
+            email:'invalidemail@gmail.com',
+            password: 'invalidpassword'
+        })
+        .expect(401)
+},10000)
+
+test('login should not login without email and user', async () =>{
+    await request(app).post('/api/v1/users/login')
+        .send({
+            email:'',
+            password: ''
+        })
+        .expect(400)
+},10000)
+
 
 test('it should logout a valid logged user', async () =>{
     await request(app).get('/api/v1/users/logout')
