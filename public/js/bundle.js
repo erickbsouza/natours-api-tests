@@ -180,7 +180,9 @@ module.exports = function (it, S) {
   if (!isObject(it)) return it;
   var fn, val;
   if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
-  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  fn = it.valueOf;
+  val = fn.call(it);
+  if (typeof (fn) == 'function' && !isObject(val)) return val;
   if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
   throw TypeError("Can't convert object to primitive value");
 };
@@ -7405,6 +7407,7 @@ function listener(event, done) {
 }
 
 },{}],"../../node_modules/on-finished/index.js":[function(require,module,exports) {
+  'use strict';
 var process = require("process");
 /*!
  * on-finished
@@ -7412,7 +7415,6 @@ var process = require("process");
  * Copyright(c) 2014 Douglas Christopher Wilson
  * MIT Licensed
  */
-'use strict';
 /**
  * Module exports.
  * @public
@@ -7714,6 +7716,7 @@ function setWriteHeadHeaders(statusCode) {
   return args;
 }
 },{}],"../../node_modules/morgan/index.js":[function(require,module,exports) {
+'use strict';
 var process = require("process");
 /*!
  * morgan
@@ -7723,7 +7726,6 @@ var process = require("process");
  * Copyright(c) 2014-2017 Douglas Christopher Wilson
  * MIT Licensed
  */
-'use strict';
 /**
  * Module exports.
  * @public
